@@ -12,9 +12,10 @@ const sendMail = async (name, email, message) => {
     });
 
     const mailOption = {
-        from: process.env.EMAIL_ADRESS,
+        from: process.env.EMAIL_ADDRESS,
         to: process.env.EMAIL_ADDRESS,
-        subject: `Nouveau message de ${name}`,
+        replyTo: email,
+        subject: `Nouveau message de ${name}, via le formulaire.`,
         text: message
     }
 
