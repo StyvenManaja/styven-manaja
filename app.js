@@ -6,16 +6,21 @@ require('dotenv').config();
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const route = require('./src/routes/route');
-const userRoute = require('./src/routes/userRoute');
-const authRoute = require('./src/routes/authRoute');
+const userRoute = require('./src/routes/user.route');
+const authRoute = require('./src/routes/auth.route');
 
 const app = express();
 
-//middlewares
+// Configuration CORS (uniquement une fois ici)
+app.use(cors({
+    origin: 'http://localhost:5173',  // URL du frontend React
+    credentials: true  // Permet d'envoyer les cookies avec les requêtes
+}));
+
+// Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
-app.use(cors());
 app.use(helmet());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());

@@ -2,10 +2,9 @@
 const jwt = require('jsonwebtoken');
 
 const authentication = (req, res, next) => {
-    let authHeader = req.headers['authorization'];  //récuperation du header qui contient le token
-    let token = authHeader && authHeader.split(' ')[1]; //extracter le token depuis le header(form du header: Bearer <Access token>)
+    let token = req.cookies.accessToken;    //récuperer le token depuis les cookies
     if(!token) {
-        return res.status(403).json({ message: 'No token found.' });
+        return res.status(401).json({ message: 'No token found.' });
     }
 
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (error, decoded) => {

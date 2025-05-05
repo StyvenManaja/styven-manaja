@@ -1,4 +1,4 @@
-const userService = require('../services/userService');
+const userService = require('../services/user.service');
 
 //controller d'enregistrement d'utilisateur
 const registerUser = async (req, res) => {
@@ -18,16 +18,30 @@ const loginUser = async (req, res) => {
         return res.status(403).json({ message: 'User not found.' });        //si l'utilisateur n'est pas trouver
     }
 
-    //stockage du refresh token dans un cookie pour pouvoir l'utiliser plus tard
+    //stockage de l'access et refresh token dans les cookies pour pouvoir les utiliser plus tard
+    res.cookie('accessToken', user.accessToken, ({
+        httpOnly: true,
+        secure: false,
+        sameSite: 'Strict',
+        maxAge: 1 * 60 * 1000
+    }))
+    
     res.cookie('refreshToken', user.refreshToken, ({
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
+        secure: false,
         sameSite: 'Strict',
         maxAge: 1 * 60 * 60 * 1000
     }))
 
-    //envoi de l'access token au front-end
-    res.status(200).json({ accessToken: user.accessToken });
+    res.status(200).json({ message: 'Login successful.' });
 }
 
-module.exports = { registerUser, loginUser };
+//controller qui envoi le nom et l'email de l'utilisateur
+const userData = (req, res) => {
+    res.status(200).json({
+        username: req.username,
+        email: req.email
+    })
+}
+
+module.exports = { registerUser, loginUser, userData };

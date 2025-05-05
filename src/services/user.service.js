@@ -1,4 +1,4 @@
-const userRepository = require('../repositories/userRepository');
+const userRepository = require('../repositories/user.repository');
 const tokenGenerator = require('../utils/tokenGenerator');
 
 const registerUser = async (username, email, password) => {
