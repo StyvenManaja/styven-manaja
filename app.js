@@ -8,6 +8,7 @@ const cookieParser = require('cookie-parser');
 const route = require('./src/routes/route');
 const userRoute = require('./src/routes/user.route');
 const authRoute = require('./src/routes/auth.route');
+const postRoute = require('./src/routes/post.route');
 
 const app = express();
 
@@ -24,9 +25,11 @@ app.use(morgan('dev'));
 app.use(helmet());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
+//utilisation de tout les routes
 app.use(route);
 app.use(userRoute);
 app.use(authRoute);
+app.use(postRoute);
 
 app.use((req, res) => {
     res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
