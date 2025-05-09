@@ -37,4 +37,7 @@ app.use((req, res) => {
 
 app.set('views', path.join(__dirname, 'views'));
 
+//mis en place du Middlewares pour les view avec ejs
+app.set('view engine', 'ejs');
+
 module.exports = app;

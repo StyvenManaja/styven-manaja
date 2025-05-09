@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { loginUser } from '../components/api';
+import '../assets/login.css';
 
 function LoginPage() {
   const [email, setEmail] = useState('');
@@ -24,8 +25,8 @@ function LoginPage() {
 
   return (
     <div className="login-wrapper">
-      <h2>Connexion</h2>
       <form onSubmit={handleSubmit} className="login-form">
+        <h2>Admin</h2>
         <label>Email</label>
         <input
           type="email"

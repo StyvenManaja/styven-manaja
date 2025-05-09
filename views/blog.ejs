@@ -4,13 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="description" content="Back-end developer specializing in Node.js and APIs">
-  <title>Styven Manaja | Back-end Developer</title>
-  <link rel="shortcut icon" href="/assets/img/favicon.png" type="image/png">
+  <title>Blog | Styven Manaja</title>
   <link rel="stylesheet" href="/css/style.css" />
+  <link rel="shortcut icon" href="/assets/img/favicon.png" type="image/png">
 </head>
 <body>
   <header>
-    <div class="container">
+    <div class="container header-container">
       <h1 class="logo">Styven Manaja</h1>
       <nav>
         <ul class="nav-links">
@@ -25,13 +25,21 @@
     </div>
   </header>
 
-  <section class="hero">
+  <section class="services blog">
     <div class="container">
-      <h2>Hello, I'm <span>Styven Manaja</span></h2>
-      <p>Back-end Developer | Node.js | API Specialist</p>
-      <div class="hero-buttons">
-        <a href="/assets/cv/styven-manaja-CV.pdf" download class="btn">Download CV</a>
-        <a href="/contact" class="btn btn-secondary">Contact Me</a>
+      <h2>From Code to Content 🧠</h2>
+      <p>Here are my blog posts, where I share insights, struggles, back-end development tips, and more.</p>
+      
+      <div class="blog-list">
+        <% let posts = postList %>
+        <% for(post of posts) { %>
+          <div class="service-item">
+            <a href="/blog/<%= post.id %>">
+              <h3><%= post.title %></h3>
+              <p>Read the article →</p>
+            </a>
+          </div>
+        <% } %>
       </div>
     </div>
   </section>

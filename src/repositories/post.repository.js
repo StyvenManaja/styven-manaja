@@ -30,6 +30,19 @@ const findAllPost = async () => {
     }
 }
 
+//récuperer une post spécifique
+const findAPost = async (id) => {
+    try {
+        //récuperation du post depuis la base
+        let post = await Post.findById(id);
+        return post;
+    } catch (error) {
+        //s'il y avait une erreur lors de la récuperation du post
+        console.log('An error occured when finding the post: ', error.message);
+        return null;
+    }
+}
+
 //mise à jour d'un post
 const updatePost = async (id, title, content) => {
     try {
@@ -55,4 +68,4 @@ const deletePost = async (id) => {
     }
 }
 
-module.exports = { createPost, findAllPost, updatePost, deletePost };
+module.exports = { createPost, findAllPost, updatePost, deletePost, findAPost };

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Back-end developer specializing in Node.js and APIs" />
+  <title><%= post.title %> | Styven Manaja</title>
+  <link rel="stylesheet" href="/css/post.css" />
+  <link rel="shortcut icon" href="/assets/img/favicon.png" type="image/png">
+</head>
+<body>
+  <nav>
+    <a href="/blog" class="back-link">&larr; Back to the blog</a>
+  </nav>
+
+  <main class="container">
+    <header>
+      <h1 class="title"><%= post.title %></h1>
+      <p class="meta">
+        By <span class="author"><%= post.author %></span> — 
+        <time datetime="<%= post.createdAt.toISOString() %>">
+          <%= post.createdAt.toLocaleDateString() %>
+        </time>
+      </p>
+    </header>
+
+    <article class="content">
+      <div>
+        <%- post.content %>
+      </div>
+    </article>
+  </main>
+</body>
+</html>

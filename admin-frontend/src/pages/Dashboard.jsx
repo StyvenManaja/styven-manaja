@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { logoutUser, getProtectedData } from '../components/api';
+import { Link } from 'react-router-dom';
+import '../assets/styles.css'
 
 function Dashboard() {
   const [userData, setUserData] = useState(null);
@@ -12,9 +14,7 @@ function Dashboard() {
         setUserData(data);
       } catch (err) {
         setError('Accès refusé. Redirection...');
-        setTimeout(() => {
-          window.location.href = '/login';
-        }, 2000);
+        window.location.href = '/login';
       }
     };
 
@@ -33,7 +33,7 @@ function Dashboard() {
         <div>
     <div className="dashboard-container">
       <header className="dashboard-header">
-        <a href="/" className="back-link">← Retour au site</a>
+        <a href="https://styven-manaja.digital" className="back-link">← Retour au site</a>
         <h1>Bienvenue, {userData.username || 'utilisateur'} !</h1>
         <button className="logout-btn" onClick={handleLogout}>Déconnexion</button>
       </header>
@@ -41,7 +41,7 @@ function Dashboard() {
       <main className="admin-actions">
         <div className="action-card">
           <h2>Créer un post</h2>
-          <button className="action-btn">+</button>
+          <Link to='/dashboard/create'><button className="action-btn">+</button></Link>
         </div>
         <div className="action-card">
           <h2>Modifier un post</h2>

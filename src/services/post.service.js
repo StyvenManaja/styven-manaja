@@ -17,6 +17,11 @@ const findAllPost = async () => {
     return postList;    //sinon, on envoi la liste
 }
 
+const findAPost = async (id) => {
+    let post = await postRepository.findAPost(id);  //récuperation du post depuis la base avec son id
+    return post;
+}
+
 const updatePost = async (id, title, content) => {
     //mise à jour du Post
     let postUpdated = await postRepository.updatePost(id, title, content);  //essaye de récuperer le post mis à jour
@@ -33,4 +38,4 @@ const deletePost = async (id) => {
     return true;    //sinon, on envoi true
 }
 
-module.exports = { createPost, findAllPost, updatePost, deletePost };
+module.exports = { createPost, findAllPost, updatePost, deletePost, findAPost };
