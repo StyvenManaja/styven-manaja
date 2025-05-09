@@ -5,12 +5,12 @@
   ],
   "routes": [
     {
-      "src": "/api/(.*)",  // Seulement les routes API
+      "src": "/api/(.*)",
       "dest": "server.js"
     },
     {
       "src": "/(.*)", 
-      "dest": "/admin-frontend/dist/index.html"  // Renvoie directement le frontend
+      "dest": "/admin-frontend/dist/index.html"
     }
   ]
 }
