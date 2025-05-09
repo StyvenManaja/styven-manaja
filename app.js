@@ -33,10 +33,6 @@ app.use(userRoute);
 app.use(authRoute);
 app.use(postRoute);
 
-app.use((req, res) => {
-    res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
-});
-
 app.set('views', path.join(__dirname, 'views'));
 
 //mis en place du Middlewares pour les view avec ejs
@@ -51,6 +47,10 @@ if (process.env.NODE_ENV === 'production') {
     app.get('*', (req, res) => {
       res.sendFile(path.resolve(__dirname, 'admin-frontend', 'dist', 'index.html'));
     });
-  }
+};
+
+app.use((req, res) => {
+    res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
+});
 
 module.exports = app;
