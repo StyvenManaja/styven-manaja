@@ -38,17 +38,6 @@ app.set('views', path.join(__dirname, 'views'));
 //mis en place du Middlewares pour les view avec ejs
 app.set('view engine', 'ejs');
 
-// Middleware pour servir les fichiers statiques React
-if (process.env.NODE_ENV === 'production') {
-    // Dossier où React génère les fichiers build
-    app.use(express.static(path.join(__dirname, 'admin-frontend', 'dist')));
-  
-    // Route pour toutes les autres requêtes, retourner index.html de React
-    app.get('*', (req, res) => {
-      res.sendFile(path.resolve(__dirname, 'admin-frontend', 'dist', 'index.html'));
-    });
-};
-
 app.use((req, res) => {
     res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
 });
