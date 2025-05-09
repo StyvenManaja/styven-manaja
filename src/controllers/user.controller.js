@@ -21,14 +21,14 @@ const loginUser = async (req, res) => {
     //stockage de l'access et refresh token dans les cookies pour pouvoir les utiliser plus tard
     res.cookie('accessToken', user.accessToken, ({
         httpOnly: true,
-        secure: false,
+        secure: true,
         sameSite: 'Strict',
         maxAge: 1 * 60 * 1000
     }))
     
     res.cookie('refreshToken', user.refreshToken, ({
         httpOnly: true,
-        secure: false,
+        secure: true,
         sameSite: 'Strict',
         maxAge: 1 * 60 * 60 * 1000
     }))

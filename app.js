@@ -12,9 +12,11 @@ const postRoute = require('./src/routes/post.route');
 
 const app = express();
 
-// Configuration CORS (uniquement une fois ici)
+// Configuration CORS
 app.use(cors({
-    origin: 'http://localhost:5173',  // URL du frontend React
+    origin: process.env.NODE_ENV === 'production'
+    ? 'https://styven-manaja.digital'
+    : 'http://localhost:5173',
     credentials: true  // Permet d'envoyer les cookies avec les requêtes
 }));
 
@@ -39,5 +41,16 @@ app.set('views', path.join(__dirname, 'views'));
 
 //mis en place du Middlewares pour les view avec ejs
 app.set('view engine', 'ejs');
+
+// Middleware pour servir les fichiers statiques React
+if (process.env.NODE_ENV === 'production') {
+    // Dossier où React génère les fichiers build
+    app.use(express.static(path.join(__dirname, 'admin-frontend', 'dist')));
+  
+    // Route pour toutes les autres requêtes, retourner index.html de React
+    app.get('*', (req, res) => {
+      res.sendFile(path.resolve(__dirname, 'admin-frontend', 'dist', 'index.html'));
+    });
+  }
 
 module.exports = app;

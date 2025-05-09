@@ -21,7 +21,7 @@ const refreshToken = (req, res) => {
         //envoi du nouveau token dans les cookies
         res.cookie('accessToken', newAccessToken, ({
             httpOnly: true,
-            secure: false,
+            secure: true,
             sameSite: 'Strict',
             maxAge: 1 * 60 * 1000
         }));
@@ -33,14 +33,14 @@ const logout = (req, res) => {
     //suppression de l'access et du refresh token dans les cookies
     res.clearCookie('accessToken', {
       httpOnly: true,
-      secure: false,
+      secure: true,
       sameSite: 'Strict',
       path: '/'
     });
   
     res.clearCookie('refreshToken', {
       httpOnly: true,
-      secure: false,
+      secure: true,
       sameSite: 'Strict',
       path: '/'
     });
