@@ -12,13 +12,6 @@ const postRoute = require('./src/routes/post.route');
 
 const app = express();
 
-// Configuration CORS
-app.use(cors({
-    origin: process.env.NODE_ENV === 'production'
-    ? 'https://styven-manaja.digital'
-    : 'http://localhost:5173',
-    credentials: true  // Permet d'envoyer les cookies avec les requêtes
-}));
 
 // Middlewares
 app.use(express.json());
@@ -27,6 +20,8 @@ app.use(morgan('dev'));
 app.use(helmet());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
+app.use(cors());
+
 //utilisation de tout les routes
 app.use(route);
 app.use(userRoute);

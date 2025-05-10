@@ -3,4 +3,6 @@ const db = require('./src/config/db');
 
 db.connectToDB();
 
-module.exports = app;
+app.listen(process.env.PORT, () => {
+    console.log(`Server launced at port ${process.env.PORT}`);
+})

@@ -1,26 +1,9 @@
 {
   "version": 2,
   "builds": [
-    {
-      "src": "server.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "admin-frontend/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "admin-frontend/dist"
-      }
-    }
+    { "src": "server.js", "use": "@vercel/node" }
   ],
   "routes": [
-    {
-      "src": "^/api/(.*)$",
-      "dest": "server.js"
-    },
-    {
-      "src": "^/admin/(.*)$",
-      "dest": "/admin-frontend/dist/index.html"
-    }
+    { "src": "/api/(.*)", "dest": "/server.js" }
   ]
 }
