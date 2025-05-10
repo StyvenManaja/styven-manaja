@@ -26,8 +26,5 @@
       "src": "^/(.*)$",
       "dest": "/views/$1"
     }
-  ],
-  "static": {
-    "public": "public"
-  }
+  ]
 }
