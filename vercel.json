@@ -9,17 +9,17 @@
       "src": "admin-frontend/package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "dist"
+        "distDir": "admin-frontend/dist"
       }
     }
   ],
   "routes": [
     {
-      "src": "/api/(.*)",
+      "src": "^/api/(.*)$",
       "dest": "server.js"
     },
     {
-      "src": "/(.*)",
+      "src": "^/admin/(.*)$",
       "dest": "/admin-frontend/dist/index.html"
     }
   ]
