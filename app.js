@@ -20,7 +20,18 @@ app.use(morgan('dev'));
 app.use(helmet());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
-app.use(cors());
+app.use(cors(
+    origin: function(origin, callback){
+    // autorise les requêtes sans origin (ex: Postman)
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin) === -1){
+      const msg = "Le CORS policy ne laisse pas passer cet origin.";
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
+  credentials: true
+));
 
 //utilisation de tout les routes
 app.use(route);
