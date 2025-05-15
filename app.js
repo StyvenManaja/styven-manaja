@@ -12,6 +12,19 @@ const postRoute = require('./src/routes/post.route');
 
 const app = express();
 
+// CORS config
+const allowedOrigins = ['https://admin-frontend-ashen-two.vercel.app'];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+};
 
 // Middlewares
 app.use(express.json());
@@ -20,32 +33,19 @@ app.use(morgan('dev'));
 app.use(helmet());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
-app.use(cors(
-    origin: function(origin, callback){
-    // autorise les requêtes sans origin (ex: Postman)
-    if(!origin) return callback(null, true);
-    if(allowedOrigins.indexOf(origin) === -1){
-      const msg = "Le CORS policy ne laisse pas passer cet origin.";
-      return callback(new Error(msg), false);
-    }
-    return callback(null, true);
-  },
-  credentials: true
-));
+app.use(cors(corsOptions));
 
-//utilisation de tout les routes
+// Routes
 app.use(route);
 app.use(userRoute);
 app.use(authRoute);
 app.use(postRoute);
 
 app.set('views', path.join(__dirname, 'views'));
-
-//mis en place du Middlewares pour les view avec ejs
 app.set('view engine', 'ejs');
 
 app.use((req, res) => {
-    res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
+  res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
 });
 
 module.exports = app;
