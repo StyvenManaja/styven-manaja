@@ -20,10 +20,7 @@ app.use(morgan('dev'));
 app.use(helmet());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
-app.use(cors(
-    origin: 'https://admin-frontend-ashen-two.vercel.app',
-    credential: true,
-));
+app.use(cors());
 
 //utilisation de tout les routes
 app.use(route);
