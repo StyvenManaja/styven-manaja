@@ -41,4 +41,17 @@ const deletePost = async (req, res) => {
     res.status(200).json({ message: 'Post deleted succcessfully.' });
 }
 
-module.exports = { createPost, findAllPost, updatePost, deletePost };
+const findOnePost = async (req, res) => {
+    let { id } = req.params;
+    let post = await postService.findAPost(id);
+    if(!post) {
+        return res.status(403).json({ message: 'Error on finding post.' });
+    }
+    res.status(200).json({
+        id: post.id,
+        title: post.title,
+        content: post.content
+    });
+}
+
+module.exports = { createPost, findAllPost, updatePost, deletePost, findOnePost };

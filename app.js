@@ -20,7 +20,11 @@ app.use(morgan('dev'));
 app.use(helmet());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
-app.use(cors());
+//configuration de cors pour authorisé le requête via le frontend
+app.use(cors({
+    origin: 'http://localhost:5173',  // URL du frontend React
+    credentials: true  // Permet d'envoyer les cookies avec les requêtes
+}));
 
 //utilisation de tout les routes
 app.use(route);

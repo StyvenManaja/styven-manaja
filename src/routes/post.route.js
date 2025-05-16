@@ -8,5 +8,6 @@ route.post('/api/post/create', authentication, postController.createPost);  //cr
 route.get('/api/posts', postController.findAllPost);    //route pour récuperer les posts dans la base
 route.put('/api/post/:id', authentication, postController.updatePost);  //route pour la mis à jour du post
 route.delete('/api/post/:id', authentication, postController.deletePost);   //route pour la suppression du post
+route.get('/api/post/:id', authentication, postController.findOnePost); //route pour récuperer un seul post
 
 module.exports = route;

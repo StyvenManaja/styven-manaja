@@ -22,7 +22,7 @@ const refreshToken = (req, res) => {
         res.cookie('accessToken', newAccessToken, ({
             httpOnly: true,
             secure: true,
-            sameSite: 'Strict',
+            sameSite: 'None',
             maxAge: 1 * 60 * 1000
         }));
         res.json({ message: 'New access token sent.' });
@@ -34,14 +34,14 @@ const logout = (req, res) => {
     res.clearCookie('accessToken', {
       httpOnly: true,
       secure: true,
-      sameSite: 'Strict',
+      sameSite: 'None',
       path: '/'
     });
   
     res.clearCookie('refreshToken', {
       httpOnly: true,
       secure: true,
-      sameSite: 'Strict',
+      sameSite: 'None',
       path: '/'
     });
   
